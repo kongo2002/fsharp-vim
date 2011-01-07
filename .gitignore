@@ -1,0 +1,16 @@
+#*.pdf
+*.DS_Store
+*.aux
+*.blg
+*.lof
+*.log
+*.sqlite3
+*.swp
+*.synctex.gz
+*.toc
+./*/*.aux
+./*/*.log
+./*/*.swp
+./*/.DS_Store
+.DS_Store
+core

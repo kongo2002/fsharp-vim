@@ -1,0 +1,53 @@
+
+Vim Syntax Highlighting for F# (FSharp)
+=======================================
+
+This is a merge of the vim-included OCAML syntax files and the [vim
+F# files from Choy Rim](http://www.vim.org/scripts/script.php?script_id=2162).  I had
+some issues with the latter, and therefore this project exists at
+all.
+
+The F# syntax highlighting is sufficient for the occasional hacking
+under Linux/Mac (for heavy .NET interaction I'd recommend VisualStudio
+with the [VsVim Plugin](https://github.com/jaredpar/VsVim)).  However,
+the highlighting is not perfect.  I'm not an expert in vim
+syntax-highlighting nor do I have the resources to become one.
+Anybody more qualified then myself and willing to take over
+responsibility and maintain this package is welcome to do so.
+
+
+Installing
+----------
+
+### As a Git-submodule with Pathogen
+
+1. Install [pathogen](https://github.com/tpope/vim-pathogen)
+according to [the given instructions](http://www.vim.org/scripts/script.php?script_id=2332).
+
+2. Presuming that `.vim` is your main git repository: 
+
+  1. change into `.vim` 
+
+  2. `git submodule add  git@github.com:DrTom/fsharp-vim.git bundle/fsharp`
+
+  3. commit the git parent project
+
+3. after optionally cloning the parent:
+
+  1. do `git submodule init`
+
+  2. and then `git submodule update`
+
+### Traditional Install.
+
+Drop the contents into your `~/.vim` directory as is.
+
+
+Usage
+------
+
+Opening either `*.fs` or `*.fsx` should trigger syntax highlighting
+automatically.
+
+
+
