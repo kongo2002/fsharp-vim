@@ -141,7 +141,7 @@ syn region   fsKeyword start="\<module\>\s*\<type\>" matchgroup=fsModule end="\<
 syn match    fsMTDef "=\s*\w\(\w\|'\)*\>"hs=s+1,me=s
 
 syn keyword  fsKeyword  and as assert class
-syn keyword  fsKeyword  constraint else
+syn keyword  fsKeyword  constraint else elif
 syn keyword  fsKeyword  exception external fun
 
 syn keyword  fsKeyword  in inherit initializer
