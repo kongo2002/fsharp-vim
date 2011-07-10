@@ -1,6 +1,6 @@
 " Vim filetype plugin
 " Language:     F#
-" Last Change:  Sun 10 Jul 2011 11:26:11 PM CEST
+" Last Change:  Sun 10 Jul 2011 11:44:47 PM CEST
 " Maintainer:   Gregor Uhlenheuer <kongo2002@googlemail.com>
 
 if exists('b:did_ftplugin')
@@ -28,7 +28,7 @@ if !executable(g:fsharp_interactive_bin)
     finish
 endif
 
-function s:launchInteractive(from, to)
+function !s:launchInteractive(from, to)
     let tmpfile = tempname() . '.fsx'
     echo tmpfile
     exec a:from . ',' . a:to . 'w! ' . tmpfile
