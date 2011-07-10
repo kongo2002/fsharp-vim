@@ -1,6 +1,6 @@
 " Vim syntax file
 " Language:     F#
-" Filenames:    *.fs *.fsi *.fsx
+" Last Change:  Sun 10 Jul 2011 10:01:23 PM CEST
 " Maintainer:   Gregor Uhlenheuer <kongo2002@googlemail.com>
 "
 " Note:         This syntax file is a complete rewrite of the original version
