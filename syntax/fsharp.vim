@@ -11,21 +11,25 @@ elseif exists("b:current_syntax")
     finish
 endif
 
+
 " F# is case sensitive.
 syn case match
+
+
+" Synchronization
+syn sync minlines=50
+syn sync maxlines=500
+
 
 " Scripting directives
 syn match    fsScript "^#\<\(quit\|labels\|warnings\|directory\|cd\|load\|use\|install_printer\|remove_printer\|require\|thread\|trace\|untrace\|untrace_all\|print_depth\|print_length\)\>"
 
+
 " C# style comments
 syn match    fsComment "//.*$" contains=@fsCommentHook,fsTodo,@Spell
 
-" lowercase identifier - the standard way to match
-syn match    fsLCIdentifier /\<\(\l\|_\)\(\w\|'\)*\>/
 
-syn match    fsKeyChar    "|"
-
-" Errors
+" errors
 syn match    fsBraceErr   "}"
 syn match    fsBrackErr   "\]"
 syn match    fsParenErr   ")"
@@ -33,109 +37,17 @@ syn match    fsArrErr     "|]"
 
 syn match    fsCommentErr "\*)"
 
-syn match    fsCountErr   "\<downto\>"
-syn match    fsCountErr   "\<to\>"
 
-if !exists("fs_revised")
-    syn match    fsDoErr      "\<do\>"
-endif
-
-syn match    fsDoneErr    "\<done\>"
-syn match    fsThenErr    "\<then\>"
-
-" Error-highlighting of "end" without synchronization:
-" as keyword or as error (default)
-if exists("fs_noend_error")
-    syn match    fsKeyword    "\<end\>"
-else
-    syn match    fsEndErr     "\<end\>"
-endif
-
-" Some convenient clusters
-syn cluster  fsAllErrs contains=fsBraceErr,fsBrackErr,fsParenErr,fsCommentErr,fsCountErr,fsDoErr,fsDoneErr,fsEndErr,fsThenErr
-
-syn cluster  fsAENoParen contains=fsBraceErr,fsBrackErr,fsCommentErr,fsCountErr,fsDoErr,fsDoneErr,fsEndErr,fsThenErr
-
-syn cluster  fsContained contains=fsTodo,fsPreDef,fsModParam,fsModParam1,fsPreMPRestr,fsMPRestr,fsMPRestr1,fsMPRestr2,fsMPRestr3,fsModRHS,fsFuncWith,fsFuncStruct,fsModTypeRestr,fsModTRWith,fsWith,fsWithRest,fsModType,fsFullMod
-
-
-" Enclosing delimiters
+" enclosing delimiters
 syn region   fsEncl transparent matchgroup=fsKeyword start="(" matchgroup=fsKeyword end=")" contains=ALLBUT,@fsContained,fsParenErr
 syn region   fsEncl transparent matchgroup=fsKeyword start="{" matchgroup=fsKeyword end="}"  contains=ALLBUT,@fsContained,fsBraceErr
 syn region   fsEncl transparent matchgroup=fsKeyword start="\[" matchgroup=fsKeyword end="\]" contains=ALLBUT,@fsContained,fsBrackErr
 syn region   fsEncl transparent matchgroup=fsKeyword start="\[|" matchgroup=fsKeyword end="|\]" contains=ALLBUT,@fsContained,fsArrErr
 
 
-" Comments
+" comments
 syn region   fsComment start="(\*" end="\*)" contains=fsComment,fsTodo
 syn keyword  fsTodo contained TODO FIXME XXX NOTE
-
-
-" Objects
-syn region   fsEnd matchgroup=fsObject start="\<object\>" matchgroup=fsObject end="\<end\>" contains=ALLBUT,@fsContained,fsEndErr
-
-
-" Blocks
-if !exists("fs_revised")
-    syn region   fsEnd matchgroup=fsKeyword start="\<begin\>" matchgroup=fsKeyword end="\<end\>" contains=ALLBUT,@fsContained,fsEndErr
-endif
-
-
-" "for"
-syn region   fsNone matchgroup=fsKeyword start="\<for\>" matchgroup=fsKeyword end="\<\(to\|downto\)\>" contains=ALLBUT,@fsContained,fsCountErr
-
-
-" "do"
-if !exists("fs_revised")
-    syn region   fsDo matchgroup=fsKeyword start="\<do\>" matchgroup=fsKeyword end="\<done\>" contains=ALLBUT,@fsContained,fsDoneErr
-endif
-
-" "if"
-syn region   fsNone matchgroup=fsKeyword start="\<if\>" matchgroup=fsKeyword end="\<then\>" contains=ALLBUT,@fsContained,fsThenErr
-
-
-"" Modules
-
-" "struct"
-syn region   fsStruct matchgroup=fsModule start="\<struct\>" matchgroup=fsModule end="\<end\>" contains=ALLBUT,@fsContained,fsEndErr
-
-" "sig"
-syn region   fsSig matchgroup=fsModule start="\<sig\>" matchgroup=fsModule end="\<end\>" contains=ALLBUT,@fsContained,fsEndErr,fsModule
-syn region   fsModSpec matchgroup=fsKeyword start="\<module\>" matchgroup=fsModule end="\<\u\(\w\|'\)*\>" contained contains=@fsAllErrs,fsComment skipwhite skipempty nextgroup=fsModTRWith,fsMPRestr
-
-" "open"
-syn region   fsNone matchgroup=fsKeyword start="\<open\>" matchgroup=fsModule end="\<\u\(\w\|'\)*\(\.\u\(\w\|'\)*\)*\>" contains=@fsAllErrs,fsComment
-
-" "include"
-syn match    fsKeyword "\<include\>" skipwhite skipempty nextgroup=fsModParam,fsFullMod
-
-" "module" - somewhat complicated stuff ;-)
-syn region   fsModule matchgroup=fsKeyword start="\<module\>" matchgroup=fsModule end="\<\u\(\w\|'\)*\>" contains=@fsAllErrs,fsComment skipwhite skipempty nextgroup=fsPreDef
-syn region   fsPreDef start="."me=e-1 matchgroup=fsKeyword end="\l\|="me=e-1 contained contains=@fsAllErrs,fsComment,fsModParam,fsModTypeRestr,fsModTRWith nextgroup=fsModPreRHS
-syn region   fsModParam start="([^*]" end=")" contained contains=@fsAENoParen,fsModParam1
-syn match    fsModParam1 "\<\u\(\w\|'\)*\>" contained skipwhite skipempty nextgroup=fsPreMPRestr
-
-syn region   fsPreMPRestr start="."me=e-1 end=")"me=e-1 contained contains=@fsAllErrs,fsComment,fsMPRestr,fsModTypeRestr
-
-syn region   fsMPRestr start=":" end="."me=e-1 contained contains=@fsComment skipwhite skipempty nextgroup=fsMPRestr1,fsMPRestr2,fsMPRestr3
-syn region   fsMPRestr1 matchgroup=fsModule start="\ssig\s\=" matchgroup=fsModule end="\<end\>" contained contains=ALLBUT,@fsContained,fsEndErr,fsModule
-syn region   fsMPRestr2 start="\sfunctor\(\s\|(\)\="me=e-1 matchgroup=fsKeyword end="->" contained contains=@fsAllErrs,fsComment,fsModParam skipwhite skipempty nextgroup=fsFuncWith,fsMPRestr2
-syn match    fsMPRestr3 "\w\(\w\|'\)*\(\.\w\(\w\|'\)*\)*" contained
-syn match    fsModPreRHS "=" contained skipwhite skipempty nextgroup=fsModParam,fsFullMod
-syn region   fsModRHS start="." end=".\w\|([^*]"me=e-2 contained contains=fsComment skipwhite skipempty nextgroup=fsModParam,fsFullMod
-syn match    fsFullMod "\<\u\(\w\|'\)*\(\.\u\(\w\|'\)*\)*" contained skipwhite skipempty nextgroup=fsFuncWith
-
-syn region   fsFuncWith start="([^*]"me=e-1 end=")" contained contains=fsComment,fsWith,fsFuncStruct skipwhite skipempty nextgroup=fsFuncWith
-syn region   fsFuncStruct matchgroup=fsModule start="[^a-zA-Z]struct\>"hs=s+1 matchgroup=fsModule end="\<end\>" contains=ALLBUT,@fsContained,fsEndErr
-
-syn match    fsModTypeRestr "\<\w\(\w\|'\)*\(\.\w\(\w\|'\)*\)*\>" contained
-syn region   fsModTRWith start=":\s*("hs=s+1 end=")" contained contains=@fsAENoParen,fsWith
-syn match    fsWith "\<\(\u\(\w\|'\)*\.\)*\w\(\w\|'\)*\>" contained skipwhite skipempty nextgroup=fsWithRest
-syn region   fsWithRest start="[^)]" end=")"me=e-1 contained contains=ALLBUT,@fsContained
-
-" "module type"
-syn region   fsKeyword start="\<module\>\s*\<type\>" matchgroup=fsModule end="\<\w\(\w\|'\)*\>" contains=fsComment skipwhite skipempty nextgroup=fsMTDef
-syn match    fsMTDef "=\s*\w\(\w\|'\)*\>"hs=s+1,me=s
 
 " keywords
 syn keyword fsKeyword    abstract and as assert begin class default delegate
@@ -164,17 +76,11 @@ syn keyword  fsType      array bool char exn float format format4
 syn keyword  fsType      int int32 int64 lazy_t list nativeint option
 syn keyword  fsType      string unit
 
+" options
+syn keyword  fsOption    Some None
+
 " operators
 syn keyword  fsOperator  asr lor lsl lsr lxor mod not land
-
-syn match    fsConstructor  "(\s*)"
-syn match    fsConstructor  "\[\s*\]"
-syn match    fsConstructor  "\[|\s*>|]"
-syn match    fsConstructor  "\[<\s*>\]"
-syn match    fsConstructor  "\u\(\w\|'\)*\>"
-
-" Polymorphic variants
-syn match    fsConstructor  "`\w\(\w\|'\)*\>"
 
 " Module prefix
 syn match    fsModPath      "\u\(\w\|'\)*\."he=e-1
@@ -193,7 +99,6 @@ syn match    fsOperator     "::"
 syn match    fsOperator     "&&"
 syn match    fsOperator     "<"
 syn match    fsOperator     ">"
-" F# operators
 syn match    fsOperator     "|>"
 syn match    fsOperator     ":>"
 syn match    fsOperator     ":?>"
@@ -209,8 +114,9 @@ syn match    fsKeyChar      "?"
 syn match    fsKeyChar      "\*"
 syn match    fsKeyChar      "+"
 syn match    fsKeyChar      "="
+syn match    fsKeyChar      "|"
 
-syn match    fsOperator   "<-"
+syn match    fsOperator     "<-"
 
 syn match    fsNumber        "\v\d+"
 syn match    fsNumber        "\<-\=\d\(_\|\d\)*[l|L|n]\?\>"
@@ -222,39 +128,13 @@ syn match    fsFloat         "\<-\=\d\(_\|\d\)*\.\(_\|\d\)*\([eE][-+]\=\d\(_\|\d
 syn match    fsFloat         "\v\d+\.\d*"
 
 
-" Labels
-syn match    fsLabel        "\~\(\l\|_\)\(\w\|'\)*"lc=1
-syn match    fsLabel        "?\(\l\|_\)\(\w\|'\)*"lc=1
-syn region   fsLabel transparent matchgroup=fsLabel start="?(\(\l\|_\)\(\w\|'\)*"lc=2 end=")"me=e-1 contains=ALLBUT,@fsContained,fsParenErr
-
-
-" Synchronization
-syn sync minlines=50
-syn sync maxlines=500
-
-if !exists("fs_revised")
-    syn sync match fsDoSync      grouphere  fsDo      "\<do\>"
-    syn sync match fsDoSync      groupthere fsDo      "\<done\>"
-endif
-
-if exists("fs_revised")
-    syn sync match fsEndSync     grouphere  fsEnd     "\<\(object\)\>"
-else
-    syn sync match fsEndSync     grouphere  fsEnd     "\<\(begin\|object\)\>"
-endif
-
-syn sync match fsEndSync     groupthere fsEnd     "\<end\>"
-syn sync match fsStructSync  grouphere  fsStruct  "\<struct\>"
-syn sync match fsStructSync  groupthere fsStruct  "\<end\>"
-syn sync match fsSigSync     grouphere  fsSig     "\<sig\>"
-syn sync match fsSigSync     groupthere fsSig     "\<end\>"
-
 " preprocessor directives
-syn region      fsPreCondit
+syn region   fsPreCondit
             \ start="^\s*#\s*\(define\|undef\|if\|elif\|else\|endif\|line\|error\|warning\|light\)"
                 \ skip="\\$" end="$" contains=fsComment keepend
-syn region      fsRegion matchgroup=fsPreCondit start="^\s*#\s*region.*$"
+syn region   fsRegion matchgroup=fsPreCondit start="^\s*#\s*region.*$"
             \ end="^\s*#\s*endregion" transparent fold contains=TOP
+
 
 if version >= 508 || !exists("did_fs_syntax_inits")
     if version < 508
@@ -304,9 +184,9 @@ if version >= 508 || !exists("did_fs_syntax_inits")
     HiLink fsMethod        Include
     HiLink fsFunDef        Keyword
     HiLink fsRefAssign     Keyword
-    HiLink fsKeyChar       Operator
     HiLink fsAnyVar        Keyword
     HiLink fsTopStop       Keyword
+    HiLink fsKeyChar       Operator
     HiLink fsOperator      Operator
 
     HiLink fsBoolean       Boolean
