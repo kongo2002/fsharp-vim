@@ -1,9 +1,11 @@
 " Vim syntax file
 " Language:     F#
 " Filenames:    *.fs *.fsi *.fsx
-" Maintainers:  Thomas Schank <ThomasSchank@gmail.com>
-"               Gregor Uhlenheuer <kongo2002@googlemail.com>
-" Notes:        based on Choy Rims first version of fs.vim
+" Maintainer:   Gregor Uhlenheuer <kongo2002@googlemail.com>
+"
+" Note:         This syntax file is a complete rewrite of the original version
+"               of fs.vim from Choy Rim <choy.rim@gmail.com> and a slight
+"               modified version from Thomas Schank <ThomasSchank@gmail.com>
 
 
 if version < 600
