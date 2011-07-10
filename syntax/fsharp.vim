@@ -137,14 +137,14 @@ syn match    fsKeyChar      "|"
 
 syn match    fsOperator     "<-"
 
-syn match    fsNumber        "\v\d+"
+syn match    fsNumber        "\<\d\+"
 syn match    fsNumber        "\<-\=\d\(_\|\d\)*[l|L|n]\?\>"
 syn match    fsNumber        "\<-\=0[x|X]\(\x\|_\)\+[l|L|n]\?\>"
 syn match    fsNumber        "\<-\=0[o|O]\(\o\|_\)\+[l|L|n]\?\>"
 syn match    fsNumber        "\<-\=0[b|B]\([01]\|_\)\+[l|L|n]\?\>"
 syn match    fsFloat         "\<-\=\d\(_\|\d\)*\.\(_\|\d\)*\([eE][-+]\=\d\(_\|\d\)*\)\=\>"
 syn match    fsFloat         "\<-\=\d\(_\|\d\)*\.\(_\|\d\)*\([eE][-+]\=\d\(_\|\d\)*\)\=\>"
-syn match    fsFloat         "\v\d+\.\d*"
+syn match    fsFloat         "\<\d\+\.\d*"
 
 
 " preprocessor directives
