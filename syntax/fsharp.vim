@@ -22,7 +22,7 @@ syn match    fsScript "^#\<\(quit\|labels\|warnings\|directory\|cd\|load\|use\|i
 
 
 " C# style comments
-syn match    fsComment "//.*$" contains=@fsCommentHook,fsTodo,@Spell
+syn match    fsComment "//.*$" contains=fsTodo,@Spell
 
 
 " errors
@@ -30,15 +30,14 @@ syn match    fsBraceErr   "}"
 syn match    fsBrackErr   "\]"
 syn match    fsParenErr   ")"
 syn match    fsArrErr     "|]"
-
 syn match    fsCommentErr "\*)"
 
 
 " enclosing delimiters
-syn region   fsEncl transparent matchgroup=fsKeyword start="(" matchgroup=fsKeyword end=")" contains=ALLBUT,@fsContained,fsParenErr
-syn region   fsEncl transparent matchgroup=fsKeyword start="{" matchgroup=fsKeyword end="}"  contains=ALLBUT,@fsContained,fsBraceErr
-syn region   fsEncl transparent matchgroup=fsKeyword start="\[" matchgroup=fsKeyword end="\]" contains=ALLBUT,@fsContained,fsBrackErr
-syn region   fsEncl transparent matchgroup=fsKeyword start="\[|" matchgroup=fsKeyword end="|\]" contains=ALLBUT,@fsContained,fsArrErr
+syn region   fsEncl transparent matchgroup=fsKeyword start="(" matchgroup=fsKeyword end=")" contains=ALLBUT,fsParenErr
+syn region   fsEncl transparent matchgroup=fsKeyword start="{" matchgroup=fsKeyword end="}"  contains=ALLBUT,fsBraceErr
+syn region   fsEncl transparent matchgroup=fsKeyword start="\[" matchgroup=fsKeyword end="\]" contains=ALLBUT,fsBrackErr
+syn region   fsEncl transparent matchgroup=fsKeyword start="\[|" matchgroup=fsKeyword end="|\]" contains=ALLBUT,fsArrErr
 
 
 " comments
