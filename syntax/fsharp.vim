@@ -1,6 +1,6 @@
 " Vim syntax file
 " Language:     F#
-" Last Change:  Sun 10 Jul 2011 10:18:13 PM CEST
+" Last Change:  Sun 10 Jul 2011 10:24:32 PM CEST
 " Maintainer:   Gregor Uhlenheuer <kongo2002@googlemail.com>
 "
 " Note:         This syntax file is a complete rewrite of the original version
@@ -69,14 +69,18 @@ syn keyword fsKeyword    do done downcast downto elif else end exception
 syn keyword fsKeyword    extern for fun function global if in inherit inline
 syn keyword fsKeyword    interface lazy let match member module mutable
 syn keyword fsKeyword    namespace new of override rec static struct then
-syn keyword fsKeyword    to type upcast val void when while with yield
+syn keyword fsKeyword    to type upcast val void when while with
 
 syn keyword fsKeyword    async atomic break checked component const constraint
 syn keyword fsKeyword    constructor continue decimal eager event external
 syn keyword fsKeyword    fixed functor include method mixin object process
-syn keyword fsKeyword    property pure return select tailcall trait where
+syn keyword fsKeyword    property pure return tailcall trait
 
 syn keyword fsOCaml      asr land lor lsl lsr lxor mod sig
+
+if !exists('g:fsharp_no_linq') || g:fsharp_no_linq == 0
+    syn keyword fsLinq   orderBy select where yield
+endif
 
 " open
 syn keyword fsOpen       open
@@ -96,7 +100,7 @@ syn keyword fsBoolean    false true
 " types
 syn keyword  fsType      array bool char exn float format format4
 syn keyword  fsType      int int32 int64 lazy_t list nativeint option
-syn keyword  fsType      string unit
+syn keyword  fsType      seq string unit
 
 " options
 syn keyword  fsOption    Some None
@@ -178,6 +182,7 @@ if version >= 508 || !exists("did_fs_syntax_inits")
 
     HiLink fsKeyword       Statement
     HiLink fsOCaml         Statement
+    HiLink fsLinq          Statement
 
     HiLink fsSymbol        Function
 
