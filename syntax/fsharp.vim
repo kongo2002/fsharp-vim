@@ -2,16 +2,13 @@
 " Language:     F#
 " Filenames:    *.fs *.fsi *.fsx
 " Maintainers:  Thomas Schank <ThomasSchank@gmail.com>
-" Last Change:  2010 Sept 30 - Copied from ocaml syntax
-"       and merged some stuff from Choy Rims versoin of fs.vim
-"
+"               Gregor Uhlenheuer <kongo2002@googlemail.com>
+" Notes:        based on Choy Rims first version of fs.vim
 
-" For version 5.x: Clear all syntax items
-" For version 6.x: Quit when a syntax file was already loaded
 if version < 600
-  syntax clear
-elseif exists("b:current_syntax") && b:current_syntax == "fsharp"
-  finish
+    syntax clear
+elseif exists("b:current_syntax")
+    finish
 endif
 
 " F# is case sensitive.
@@ -40,7 +37,7 @@ syn match    fsCountErr   "\<downto\>"
 syn match    fsCountErr   "\<to\>"
 
 if !exists("fs_revised")
-  syn match    fsDoErr      "\<do\>"
+    syn match    fsDoErr      "\<do\>"
 endif
 
 syn match    fsDoneErr    "\<done\>"
@@ -49,9 +46,9 @@ syn match    fsThenErr    "\<then\>"
 " Error-highlighting of "end" without synchronization:
 " as keyword or as error (default)
 if exists("fs_noend_error")
-  syn match    fsKeyword    "\<end\>"
+    syn match    fsKeyword    "\<end\>"
 else
-  syn match    fsEndErr     "\<end\>"
+    syn match    fsEndErr     "\<end\>"
 endif
 
 " Some convenient clusters
@@ -80,7 +77,7 @@ syn region   fsEnd matchgroup=fsObject start="\<object\>" matchgroup=fsObject en
 
 " Blocks
 if !exists("fs_revised")
-  syn region   fsEnd matchgroup=fsKeyword start="\<begin\>" matchgroup=fsKeyword end="\<end\>" contains=ALLBUT,@fsContained,fsEndErr
+    syn region   fsEnd matchgroup=fsKeyword start="\<begin\>" matchgroup=fsKeyword end="\<end\>" contains=ALLBUT,@fsContained,fsEndErr
 endif
 
 
@@ -90,7 +87,7 @@ syn region   fsNone matchgroup=fsKeyword start="\<for\>" matchgroup=fsKeyword en
 
 " "do"
 if !exists("fs_revised")
-  syn region   fsDo matchgroup=fsKeyword start="\<do\>" matchgroup=fsKeyword end="\<done\>" contains=ALLBUT,@fsContained,fsDoneErr
+    syn region   fsDo matchgroup=fsKeyword start="\<do\>" matchgroup=fsKeyword end="\<done\>" contains=ALLBUT,@fsContained,fsDoneErr
 endif
 
 " "if"
@@ -140,48 +137,35 @@ syn region   fsWithRest start="[^)]" end=")"me=e-1 contained contains=ALLBUT,@fs
 syn region   fsKeyword start="\<module\>\s*\<type\>" matchgroup=fsModule end="\<\w\(\w\|'\)*\>" contains=fsComment skipwhite skipempty nextgroup=fsMTDef
 syn match    fsMTDef "=\s*\w\(\w\|'\)*\>"hs=s+1,me=s
 
-syn keyword  fsKeyword  and as assert class
-syn keyword  fsKeyword  constraint else elif
-syn keyword  fsKeyword  exception external fun
-
-syn keyword  fsKeyword  in inherit initializer
-syn keyword  fsKeyword  land lazy let match
-syn keyword  fsKeyword  method mutable new of
-syn keyword  fsKeyword  parser private raise rec
-syn keyword  fsKeyword  try type
-syn keyword  fsKeyword  val virtual when while with
-
-if exists("fs_revised")
-  syn keyword  fsKeyword  do value
-  syn keyword  fsBoolean  True False
-else
-  syn keyword  fsKeyword  function
-  syn keyword  fsBoolean  true false
-  syn match    fsKeyChar  "!"
-endif
-
-" F# keywords
-syn keyword fsKeyword    abstract and as assert begin class default delegate do done downcast downto else end
-syn keyword fsKeyword    enum exception extern false finally for fun function if in inherit interface land lazy let 
-syn keyword fsKeyword    match member  module mutable namespace new null of open or override rec sig static struct then to true try
-syn keyword fsKeyword    type val when inline upcast while with void
-syn keyword fsKeyword    asr land lor lsl lsr lxor mod
-syn keyword fsKeyword    async atomic break checked component const constraint 
+" keywords
+syn keyword fsKeyword    abstract and as assert begin class default delegate
+syn keyword fsKeyword    do done downcast downto else end
+syn keyword fsKeyword    enum exception extern false finally for fun function
+syn keyword fsKeyword    if in inherit interface land lazy let
+syn keyword fsKeyword    match member  module mutable namespace new null of
+syn keyword fsKeyword    open or override rec sig static struct then to true
+syn keyword fsKeyword    try type val when inline upcast while with void
+syn keyword fsKeyword    async atomic break checked component const constraint
 syn keyword fsKeyword    constructor continue decimal eager event
-syn keyword fsKeyword    external fixed functor include method mixin object 
-syn keyword fsKeyword    process property protected public pure readonly return sealed  
+syn keyword fsKeyword    external fixed functor include method mixin object
+syn keyword fsKeyword    process property protected public pure readonly return sealed
 syn keyword fsKeyword    yield virtual volatile
 
-syn keyword fsModifier			abstract const extern internal override private protected public readonly sealed static virtual volatile
-" constant
-syn keyword fsConstant			false null true
-" exception
+" modifiers
+syn keyword fsModifier   abstract const extern internal override private
+syn keyword fsModifier   protected public readonly sealed static virtual
+syn keyword fsModifier   volatile
 
-syn keyword  fsType     array bool char exn float format format4
-syn keyword  fsType     int int32 int64 lazy_t list nativeint option
-syn keyword  fsType     string unit
+" constants
+syn keyword fsConstant   false null true
 
-syn keyword  fsOperator asr lor lsl lsr lxor mod not
+" types
+syn keyword  fsType      array bool char exn float format format4
+syn keyword  fsType      int int32 int64 lazy_t list nativeint option
+syn keyword  fsType      string unit
+
+" operators
+syn keyword  fsOperator  asr lor lsl lsr lxor mod not land
 
 syn match    fsConstructor  "(\s*)"
 syn match    fsConstructor  "\[\s*\]"
@@ -226,11 +210,7 @@ syn match    fsKeyChar      "\*"
 syn match    fsKeyChar      "+"
 syn match    fsKeyChar      "="
 
-if exists("fs_revised")
-  syn match    fsErr        "<-"
-else
-  syn match    fsOperator   "<-"
-endif
+syn match    fsOperator   "<-"
 
 syn match    fsNumber        "\v\d+"
 syn match    fsNumber        "\<-\=\d\(_\|\d\)*[l|L|n]\?\>"
@@ -253,14 +233,14 @@ syn sync minlines=50
 syn sync maxlines=500
 
 if !exists("fs_revised")
-  syn sync match fsDoSync      grouphere  fsDo      "\<do\>"
-  syn sync match fsDoSync      groupthere fsDo      "\<done\>"
+    syn sync match fsDoSync      grouphere  fsDo      "\<do\>"
+    syn sync match fsDoSync      groupthere fsDo      "\<done\>"
 endif
 
 if exists("fs_revised")
-  syn sync match fsEndSync     grouphere  fsEnd     "\<\(object\)\>"
+    syn sync match fsEndSync     grouphere  fsEnd     "\<\(object\)\>"
 else
-  syn sync match fsEndSync     grouphere  fsEnd     "\<\(begin\|object\)\>"
+    syn sync match fsEndSync     grouphere  fsEnd     "\<\(begin\|object\)\>"
 endif
 
 syn sync match fsEndSync     groupthere fsEnd     "\<end\>"
@@ -270,85 +250,82 @@ syn sync match fsSigSync     grouphere  fsSig     "\<sig\>"
 syn sync match fsSigSync     groupthere fsSig     "\<end\>"
 
 " preprocessor directives
-syn region	fsPreCondit
-    \ start="^\s*#\s*\(define\|undef\|if\|elif\|else\|endif\|line\|error\|warning\|light\)"
-    \ skip="\\$" end="$" contains=fsComment keepend
-syn region	fsRegion matchgroup=fsPreCondit start="^\s*#\s*region.*$"
-    \ end="^\s*#\s*endregion" transparent fold contains=TOP
+syn region      fsPreCondit
+            \ start="^\s*#\s*\(define\|undef\|if\|elif\|else\|endif\|line\|error\|warning\|light\)"
+                \ skip="\\$" end="$" contains=fsComment keepend
+syn region      fsRegion matchgroup=fsPreCondit start="^\s*#\s*region.*$"
+            \ end="^\s*#\s*endregion" transparent fold contains=TOP
 
-" Define the default highlighting.
-" For version 5.7 and earlier: only when not done already
-" For version 5.8 and later: only when an item doesn't have highlighting yet
 if version >= 508 || !exists("did_fs_syntax_inits")
-  if version < 508
-    let did_fs_syntax_inits = 1
-    command -nargs=+ HiLink hi link <args>
-  else
-    command -nargs=+ HiLink hi def link <args>
-  endif
+    if version < 508
+        let did_fs_syntax_inits = 1
+        command -nargs=+ HiLink hi link <args>
+    else
+        command -nargs=+ HiLink hi def link <args>
+    endif
 
-  HiLink fsBraceErr	   Error
-  HiLink fsBrackErr	   Error
-  HiLink fsParenErr	   Error
-  HiLink fsArrErr	   Error
+    HiLink fsBraceErr      Error
+    HiLink fsBrackErr      Error
+    HiLink fsParenErr      Error
+    HiLink fsArrErr        Error
 
-  HiLink fsCommentErr   Error
+    HiLink fsCommentErr    Error
 
-  HiLink fsCountErr	   Error
-  HiLink fsDoErr	   Error
-  HiLink fsDoneErr	   Error
-  HiLink fsEndErr	   Error
-  HiLink fsThenErr	   Error
+    HiLink fsCountErr      Error
+    HiLink fsDoErr         Error
+    HiLink fsDoneErr       Error
+    HiLink fsEndErr        Error
+    HiLink fsThenErr       Error
 
-  HiLink fsCharErr	   Error
+    HiLink fsCharErr       Error
 
-  HiLink fsErr	   Error
+    HiLink fsErr           Error
 
-  HiLink fsComment	   Comment
+    HiLink fsComment       Comment
 
-  HiLink fsModPath	   Include
-  HiLink fsObject	   Include
-  HiLink fsModule	   Include
-  HiLink fsModParam1    Include
-  HiLink fsModType	   Include
-  HiLink fsMPRestr3	   Include
-  HiLink fsFullMod	   Include
-  HiLink fsModTypeRestr Include
-  HiLink fsWith	   Include
-  HiLink fsMTDef	   Include
+    HiLink fsModPath       Include
+    HiLink fsObject        Include
+    HiLink fsModule        Include
+    HiLink fsModParam1     Include
+    HiLink fsModType       Include
+    HiLink fsMPRestr3      Include
+    HiLink fsFullMod       Include
+    HiLink fsModTypeRestr  Include
+    HiLink fsWith          Include
+    HiLink fsMTDef         Include
 
-  HiLink fsScript	   Include
+    HiLink fsScript        Include
 
-  HiLink fsConstructor  Constant
+    HiLink fsConstructor   Constant
 
-  HiLink fsModPreRHS    Keyword
-  HiLink fsMPRestr2	   Keyword
-  HiLink fsKeyword	   Keyword
-  HiLink fsMethod	   Include
-  HiLink fsFunDef	   Keyword
-  HiLink fsRefAssign    Keyword
-  HiLink fsKeyChar	   Keyword
-  HiLink fsAnyVar	   Keyword
-  HiLink fsTopStop	   Keyword
-  HiLink fsOperator	   Keyword
+    HiLink fsModPreRHS     Keyword
+    HiLink fsMPRestr2      Keyword
+    HiLink fsKeyword       Keyword
+    HiLink fsMethod        Include
+    HiLink fsFunDef        Keyword
+    HiLink fsRefAssign     Keyword
+    HiLink fsKeyChar       Operator
+    HiLink fsAnyVar        Keyword
+    HiLink fsTopStop       Keyword
+    HiLink fsOperator      Operator
 
-  HiLink fsBoolean	   Boolean
-  HiLink fsCharacter    Character
-  HiLink fsNumber	   Number
-  HiLink fsFloat	   Float
-  HiLink fsString	   String
+    HiLink fsBoolean       Boolean
+    HiLink fsCharacter     Character
+    HiLink fsNumber        Number
+    HiLink fsFloat         Float
+    HiLink fsString        String
 
-  HiLink fsLabel	   Identifier
+    HiLink fsLabel         Identifier
 
-  HiLink fsType	   Type
+    HiLink fsType          Type
 
-  HiLink fsTodo	   Todo
+    HiLink fsTodo          Todo
 
-  HiLink fsEncl	   Keyword
+    HiLink fsEncl          Keyword
 
-  delcommand HiLink
+    delcommand HiLink
 endif
 
-let b:current_syntax = "fs"
+let b:current_syntax = "fsharp"
 
-" vim: ts=8
+" vim: sw=4 et sts=4
