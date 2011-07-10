@@ -47,16 +47,22 @@ syn keyword  fsTodo contained TODO FIXME XXX NOTE
 " keywords
 syn keyword fsKeyword    abstract and as assert begin class default delegate
 syn keyword fsKeyword    do done downcast downto else end
-syn keyword fsKeyword    enum exception extern false finally for fun function
+syn keyword fsKeyword    enum exception extern for fun function
 syn keyword fsKeyword    if in inherit interface land lazy let
-syn keyword fsKeyword    match member  module mutable namespace new null of
-syn keyword fsKeyword    open or override rec sig static struct then to true
-syn keyword fsKeyword    try type val when inline upcast while with void
+syn keyword fsKeyword    match member  module mutable namespace new of
+syn keyword fsKeyword    or override rec sig static struct then to
+syn keyword fsKeyword    type val when inline upcast while void with
 syn keyword fsKeyword    async atomic break checked component const constraint
-syn keyword fsKeyword    constructor continue decimal eager event
-syn keyword fsKeyword    external fixed functor include method mixin object
-syn keyword fsKeyword    process property protected public pure readonly return sealed
-syn keyword fsKeyword    yield virtual volatile
+syn keyword fsKeyword    constructor continue decimal eager event external
+syn keyword fsKeyword    fixed functor include method mixin object process
+syn keyword fsKeyword    property protected public pure readonly return
+syn keyword fsKeyword    sealed yield virtual volatile
+
+" open
+syn keyword fsOpen       open
+
+" exceptions
+syn keyword fsException  try failwith finally
 
 " modifiers
 syn keyword fsModifier   abstract const extern internal override private
@@ -64,7 +70,8 @@ syn keyword fsModifier   protected public readonly sealed static virtual
 syn keyword fsModifier   volatile
 
 " constants
-syn keyword fsConstant   false null true
+syn keyword fsConstant   null
+syn keyword fsBoolean    false true
 
 " types
 syn keyword  fsType      array bool char exn float format format4
@@ -101,7 +108,6 @@ syn match    fsOperator     "&&&"
 syn match    fsOperator     "|||"
 syn match    fsOperator     "\.\."
 
-syn match    fsAnyVar       "\<_\>"
 syn match    fsKeyChar      "|[^\]]"me=e-1
 syn match    fsKeyChar      ";"
 syn match    fsKeyChar      "\~"
@@ -143,52 +149,33 @@ if version >= 508 || !exists("did_fs_syntax_inits")
     HiLink fsBrackErr      Error
     HiLink fsParenErr      Error
     HiLink fsArrErr        Error
-
     HiLink fsCommentErr    Error
-
-    HiLink fsCountErr      Error
-    HiLink fsDoErr         Error
-    HiLink fsDoneErr       Error
-    HiLink fsEndErr        Error
-    HiLink fsThenErr       Error
-
-    HiLink fsCharErr       Error
-
-    HiLink fsErr           Error
 
     HiLink fsComment       Comment
 
+    HiLink fsOpen          Include
     HiLink fsModPath       Include
-    HiLink fsObject        Include
-    HiLink fsModule        Include
-    HiLink fsModParam1     Include
-    HiLink fsModType       Include
-    HiLink fsMPRestr3      Include
-    HiLink fsFullMod       Include
-    HiLink fsModTypeRestr  Include
-    HiLink fsWith          Include
-    HiLink fsMTDef         Include
-
     HiLink fsScript        Include
 
-    HiLink fsConstructor   Constant
+    HiLink fsKeyword       Statement
 
-    HiLink fsModPreRHS     Keyword
-    HiLink fsMPRestr2      Keyword
-    HiLink fsKeyword       Keyword
-    HiLink fsMethod        Include
-    HiLink fsFunDef        Keyword
-    HiLink fsRefAssign     Keyword
-    HiLink fsAnyVar        Keyword
-    HiLink fsTopStop       Keyword
+    HiLink fsFunDef        Function
+
+    HiLink fsRefAssign     Operator
+    HiLink fsTopStop       Operator
     HiLink fsKeyChar       Operator
     HiLink fsOperator      Operator
 
     HiLink fsBoolean       Boolean
+    HiLink fsConstant      Constant
     HiLink fsCharacter     Character
     HiLink fsNumber        Number
     HiLink fsFloat         Float
     HiLink fsString        String
+
+    HiLink fsModifier      StorageClass
+
+    HiLink fsException     Exception
 
     HiLink fsLabel         Identifier
 
@@ -196,7 +183,7 @@ if version >= 508 || !exists("did_fs_syntax_inits")
 
     HiLink fsTodo          Todo
 
-    HiLink fsEncl          Keyword
+    HiLink fsEncl          Delimiter
 
     delcommand HiLink
 endif
