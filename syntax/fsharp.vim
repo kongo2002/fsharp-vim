@@ -5,6 +5,7 @@
 "               Gregor Uhlenheuer <kongo2002@googlemail.com>
 " Notes:        based on Choy Rims first version of fs.vim
 
+
 if version < 600
     syntax clear
 elseif exists("b:current_syntax")
@@ -14,11 +15,6 @@ endif
 
 " F# is case sensitive.
 syn case match
-
-
-" Synchronization
-syn sync minlines=50
-syn sync maxlines=500
 
 
 " Scripting directives
