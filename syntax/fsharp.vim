@@ -18,8 +18,13 @@ syn case match
 
 
 " Scripting directives
-syn match    fsScript "^#\<\(quit\|labels\|warnings\|directory\|cd\|load\|use\|install_printer\|remove_printer\|require\|thread\|trace\|untrace\|untrace_all\|print_depth\|print_length\)\>"
+syn match    fsSScript "^#\S\+" transparent contains=fsScript
 
+syn match    fsScript contained "#"
+syn keyword  fsScript contained quitlabels warnings directory cd load use
+syn keyword  fsScript contained install_printer remove_printer requirethread
+syn keyword  fsScript contained trace untrace untrace_all print_depth
+syn keyword  fsScript contained print_length
 
 " comments
 syn match    fsComment "//.*$" contains=fsTodo,@Spell
