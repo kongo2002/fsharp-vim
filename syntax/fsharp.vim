@@ -1,6 +1,6 @@
 " Vim syntax file
 " Language:     F#
-" Last Change:  Sun 10 Jul 2011 10:24:32 PM CEST
+" Last Change:  Sun 10 Jul 2011 10:29:37 PM CEST
 " Maintainer:   Gregor Uhlenheuer <kongo2002@googlemail.com>
 "
 " Note:         This syntax file is a complete rewrite of the original version
@@ -101,6 +101,11 @@ syn keyword fsBoolean    false true
 syn keyword  fsType      array bool char exn float format format4
 syn keyword  fsType      int int32 int64 lazy_t list nativeint option
 syn keyword  fsType      seq string unit
+
+" core classes
+syn match    fsCore      "\u\a*\." transparent contains=fsCoreClass
+
+syn keyword  fsCoreClass Array Directory File List Path Seq Tuple contained
 
 " options
 syn keyword  fsOption    Some None
@@ -209,6 +214,8 @@ if version >= 508 || !exists("did_fs_syntax_inits")
     HiLink fsModule        Identifier
 
     HiLink fsType          Type
+
+    HiLink fsCoreClass     Typedef
 
     HiLink fsTodo          Todo
 
