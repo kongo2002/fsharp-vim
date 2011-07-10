@@ -1,6 +1,6 @@
 " Vim syntax file
 " Language:     F#
-" Last Change:  Sun 10 Jul 2011 10:01:23 PM CEST
+" Last Change:  Sun 10 Jul 2011 10:18:13 PM CEST
 " Maintainer:   Gregor Uhlenheuer <kongo2002@googlemail.com>
 "
 " Note:         This syntax file is a complete rewrite of the original version
@@ -64,18 +64,19 @@ syn region   fsComment start="(\*" end="\*)" contains=fsComment,fsTodo
 syn keyword  fsTodo contained TODO FIXME XXX NOTE
 
 " keywords
-syn keyword fsKeyword    abstract and as assert begin class default delegate
-syn keyword fsKeyword    do done downcast downto else end
-syn keyword fsKeyword    enum exception extern for fun function
-syn keyword fsKeyword    if in inherit interface land lazy let
-syn keyword fsKeyword    match member  module mutable namespace new of
-syn keyword fsKeyword    or override rec sig static struct then to
-syn keyword fsKeyword    type val when inline upcast while void with
+syn keyword fsKeyword    abstract as assert base begin class default delegate
+syn keyword fsKeyword    do done downcast downto elif else end exception
+syn keyword fsKeyword    extern for fun function global if in inherit inline
+syn keyword fsKeyword    interface lazy let match member module mutable
+syn keyword fsKeyword    namespace new of override rec static struct then
+syn keyword fsKeyword    to type upcast val void when while with yield
+
 syn keyword fsKeyword    async atomic break checked component const constraint
 syn keyword fsKeyword    constructor continue decimal eager event external
 syn keyword fsKeyword    fixed functor include method mixin object process
-syn keyword fsKeyword    property protected public pure readonly return
-syn keyword fsKeyword    sealed yield virtual volatile
+syn keyword fsKeyword    property pure return select tailcall trait where
+
+syn keyword fsOCaml      asr land lor lsl lsr lxor mod sig
 
 " open
 syn keyword fsOpen       open
@@ -101,7 +102,7 @@ syn keyword  fsType      string unit
 syn keyword  fsOption    Some None
 
 " operators
-syn keyword  fsOperator  asr lor lsl lsr lxor mod not land
+syn keyword fsOperator   not and or
 
 syn match    fsCharacter    "'\\\d\d\d'\|'\\[\'ntbr]'\|'.'"
 syn match    fsCharErr      "'\\\d\d'\|'\\\d'"
@@ -176,6 +177,7 @@ if version >= 508 || !exists("did_fs_syntax_inits")
     HiLink fsScript        Include
 
     HiLink fsKeyword       Statement
+    HiLink fsOCaml         Statement
 
     HiLink fsSymbol        Function
 
