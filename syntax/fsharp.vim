@@ -21,8 +21,20 @@ syn case match
 syn match    fsScript "^#\<\(quit\|labels\|warnings\|directory\|cd\|load\|use\|install_printer\|remove_printer\|require\|thread\|trace\|untrace\|untrace_all\|print_depth\|print_length\)\>"
 
 
-" C# style comments
+" comments
 syn match    fsComment "//.*$" contains=fsTodo,@Spell
+
+
+" symbol names
+syn match    fsSymbol     "\(\<let\s\+\)\@<=\S\+"
+
+
+" modules
+syn match    fsModule     "\(\<open\s\+\)\@<=\S\+"
+
+
+" types
+syn match    fsTypeName   "\(\<type\s\+\)\@<=\S\+"
 
 
 " errors
@@ -84,9 +96,6 @@ syn keyword  fsOption    Some None
 " operators
 syn keyword  fsOperator  asr lor lsl lsr lxor mod not land
 
-" Module prefix
-syn match    fsModPath      "\u\(\w\|'\)*\."he=e-1
-
 syn match    fsCharacter    "'\\\d\d\d'\|'\\[\'ntbr]'\|'.'"
 syn match    fsCharErr      "'\\\d\d'\|'\\\d'"
 syn match    fsCharErr      "'\\[^\'ntbr]'"
@@ -97,6 +106,8 @@ syn match    fsRefAssign    ":="
 syn match    fsTopStop      ";;"
 syn match    fsOperator     "\^"
 syn match    fsOperator     "::"
+
+syn match    fsLabel        "\<_\>"
 
 syn match    fsOperator     "&&"
 syn match    fsOperator     "<"
@@ -159,8 +170,9 @@ if version >= 508 || !exists("did_fs_syntax_inits")
 
     HiLink fsKeyword       Statement
 
-    HiLink fsFunDef        Function
+    HiLink fsSymbol        Function
 
+    HiLink fsFunDef        Operator
     HiLink fsRefAssign     Operator
     HiLink fsTopStop       Operator
     HiLink fsKeyChar       Operator
@@ -178,6 +190,9 @@ if version >= 508 || !exists("did_fs_syntax_inits")
     HiLink fsException     Exception
 
     HiLink fsLabel         Identifier
+    HiLink fsOption        Identifier
+    HiLink fsTypeName      Identifier
+    HiLink fsModule        Identifier
 
     HiLink fsType          Type
 
