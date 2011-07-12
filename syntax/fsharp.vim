@@ -1,23 +1,23 @@
 " Vim syntax file
 " Language:     F#
-" Last Change:  Sun 10 Jul 2011 10:29:37 PM CEST
+" Last Change:  Tue 12 Jul 2011 10:34:14 PM CEST
 " Maintainer:   Gregor Uhlenheuer <kongo2002@googlemail.com>
 "
 " Note:         This syntax file is a complete rewrite of the original version
 "               of fs.vim from Choy Rim <choy.rim@gmail.com> and a slight
 "               modified version from Thomas Schank <ThomasSchank@gmail.com>
 
-
 if version < 600
     syntax clear
-elseif exists("b:current_syntax")
+elseif exists('b:current_syntax')
     finish
 endif
-
 
 " F# is case sensitive.
 syn case match
 
+" reset 'iskeyword' setting
+setl isk&vim
 
 " Scripting directives
 syn match    fsSScript "^#\S\+" transparent contains=fsScript
@@ -224,6 +224,6 @@ if version >= 508 || !exists("did_fs_syntax_inits")
     delcommand HiLink
 endif
 
-let b:current_syntax = "fsharp"
+let b:current_syntax = 'fsharp'
 
 " vim: sw=4 et sts=4
