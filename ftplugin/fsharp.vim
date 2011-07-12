@@ -1,12 +1,15 @@
 " Vim filetype plugin
 " Language:     F#
-" Last Change:  Tue 12 Jul 2011 10:25:39 PM CEST
+" Last Change:  Tue 12 Jul 2011 11:23:17 PM CEST
 " Maintainer:   Gregor Uhlenheuer <kongo2002@googlemail.com>
 
 if exists('b:did_ftplugin')
     finish
 endif
 let b:did_ftplugin = 1
+
+let s:cpo_save = &cpo
+set cpo&vim
 
 let s:candidates = [ 'fsi',
             \ 'fsi.exe',
@@ -36,5 +39,7 @@ function! s:launchInteractive(from, to)
 endfunction
 
 com! -buffer -range=% Interactive call s:launchInteractive(<line1>, <line2>)
+
+let &cpo = s:cpo_save
 
 " vim: sw=4 et sts=4
