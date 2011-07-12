@@ -1,6 +1,6 @@
 " Vim filetype plugin
 " Language:     F#
-" Last Change:  Tue 12 Jul 2011 11:25:06 PM CEST
+" Last Change:  Tue 12 Jul 2011 11:29:50 PM CEST
 " Maintainer:   Gregor Uhlenheuer <kongo2002@googlemail.com>
 
 if exists('b:did_ftplugin')
@@ -26,8 +26,10 @@ if !exists('g:fsharp_interactive_bin')
 endif
 
 if !executable(g:fsharp_interactive_bin)
+    echohl WarningMsg
     echom 'fsharp.vim: no fsharp interactive binary found'
     echom 'fsharp.vim: set g:fsharp_interactive_bin appropriately'
+    echohl None
     finish
 endif
 
