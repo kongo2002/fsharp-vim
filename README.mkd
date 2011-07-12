@@ -23,7 +23,7 @@ Installing
 
 2. Move into your main vimfiles git repository
 
-3. Run `git submodule add git@github.com:kongo2002/fsharp-vim.git bundle/fsharp`
+3. Run `git submodule add git://github.com/kongo2002/fsharp-vim.git bundle/fsharp`
 
 ### Traditional install
 
