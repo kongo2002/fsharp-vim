@@ -1,6 +1,6 @@
 " Vim syntax file
 " Language:     F#
-" Last Change:  Tue 12 Jul 2011 10:38:40 PM CEST
+" Last Change:  Tue 12 Jul 2011 11:48:00 PM CEST
 " Maintainer:   Gregor Uhlenheuer <kongo2002@googlemail.com>
 "
 " Note:         This syntax file is a complete rewrite of the original version
@@ -86,7 +86,7 @@ endif
 syn keyword fsOpen       open
 
 " exceptions
-syn keyword fsException  try failwith finally
+syn keyword fsException  try failwith failwithf finally
 
 " modifiers
 syn keyword fsModifier   abstract const extern internal override private
