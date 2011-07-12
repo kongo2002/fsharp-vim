@@ -1,53 +1,40 @@
 
-Vim Syntax Highlighting for F# (FSharp)
+Vim Runtime Files for F# (FSharp)
 =======================================
 
-This is a merge of the vim-included OCAML syntax files and the [vim
-F# files from Choy Rim](http://www.vim.org/scripts/script.php?script_id=2162).  I had
-some issues with the latter, and therefore this project exists at
-all.
+This runtime files are inspired by the original version of a fsharp syntax file
+named [fs.vim](http://www.vim.org/scripts/script.php?script_id=2162) from [Choy
+Rim](mailto:choy.rim@gmail.com) and a slightly [modified
+version](https://github.com/DrTom/fsharp-vim) from [Thomas
+Schank](mailto:ThomasSchank@gmail.com). The syntax file is now completely
+rewritten.
 
-The F# syntax highlighting is sufficient for the occasional hacking
-under Linux/Mac (for heavy .NET interaction I'd recommend VisualStudio
-with the [VsVim Plugin](https://github.com/jaredpar/VsVim)).  However,
-the highlighting is not perfect.  I'm not an expert in vim
-syntax-highlighting nor do I have the resources to become one.
-Anybody more qualified then myself and willing to take over
-responsibility and maintain this package is welcome to do so.
+This vim runtime files are especially helpful when editing F# files under
+Linux/Mac. Under Windows I would recommend to use VisualStudio with the great
+[VsVim Plugin](https://github.com/jaredpar/VsVim) by Jared Parsons.
 
 
 Installing
 ----------
 
-### As a Git-submodule with Pathogen
+### Using pathogen
 
 1. Install [pathogen](https://github.com/tpope/vim-pathogen)
-according to [the given instructions](http://www.vim.org/scripts/script.php?script_id=2332).
 
-2. Presuming that `.vim` is your main git repository: 
+2. Move into your main vimfiles git repository
 
-  1. change into `.vim` 
+3. Run `git submodule add git@github.com:kongo2002/fsharp-vim.git bundle/fsharp`
 
-  2. `git submodule add  git@github.com:DrTom/fsharp-vim.git bundle/fsharp`
+### Traditional install
 
-  3. commit the git parent project
-
-3. after optionally cloning the parent:
-
-  1. do `git submodule init`
-
-  2. and then `git submodule update`
-
-### Traditional Install.
-
-Drop the contents into your `~/.vim` directory as is.
+Drop the contents into your `~/.vim` directory as usual
 
 
 Usage
 ------
 
-Opening either `*.fs` or `*.fsx` should trigger syntax highlighting
-automatically.
+Opening either `*.fs`, `*.fsi` or `*.fsx` files should trigger syntax
+highlighting and other depending runtime files as well.
 
 
 
