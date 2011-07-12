@@ -1,6 +1,6 @@
 " Vim syntax file
 " Language:     F#
-" Last Change:  Tue 12 Jul 2011 10:34:14 PM CEST
+" Last Change:  Tue 12 Jul 2011 10:38:40 PM CEST
 " Maintainer:   Gregor Uhlenheuer <kongo2002@googlemail.com>
 "
 " Note:         This syntax file is a complete rewrite of the original version
@@ -33,15 +33,15 @@ syn match    fsComment "//.*$" contains=fsTodo,@Spell
 
 
 " symbol names
-syn match    fsSymbol     "\(\<let\s\+\)\@<=\S\+"
+syn match    fsSymbol     "\%(\<let\s\+\%(rec\s\+\)\=\)\@<=\S\+"
 
 
 " modules
-syn match    fsModule     "\(\<open\s\+\)\@<=\S\+"
+syn match    fsModule     "\%(\<open\s\+\)\@<=\S\+"
 
 
 " types
-syn match    fsTypeName   "\(\<type\s\+\)\@<=\S\+"
+syn match    fsTypeName   "\%(\<type\s\+\)\@<=\S\+"
 
 
 " errors
