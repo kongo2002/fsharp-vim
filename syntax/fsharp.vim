@@ -1,6 +1,6 @@
 " Vim syntax file
 " Language:     F#
-" Last Change:  Wed 13 Jul 2011 11:11:33 PM CEST
+" Last Change:  Wed 13 Jul 2011 11:23:10 PM CEST
 " Maintainer:   Gregor Uhlenheuer <kongo2002@googlemail.com>
 "
 " Note:         This syntax file is a complete rewrite of the original version
@@ -76,17 +76,26 @@ syn keyword fsKeyword    constructor continue decimal eager event external
 syn keyword fsKeyword    fixed functor include method mixin object process
 syn keyword fsKeyword    property pure return tailcall trait
 
+" additional operator keywords (Microsoft.FSharp.Core.Operators)
+syn keyword fsKeyword    box hash sizeof typeof typedefof unbox ref fst snd
+syn keyword fsKeyword    stdin stdout stderr
+
+" math operators (Microsoft.FSharp.Core.Operators)
+syn keyword fsKeyword    abs acos asin atan atan2 ceil cos cosh exp floor log
+syn keyword fsKeyword    log10 pown round sign sin sinh sqrt tan tanh
+
 syn keyword fsOCaml      asr land lor lsl lsr lxor mod sig
 
 if !exists('g:fsharp_no_linq') || g:fsharp_no_linq == 0
-    syn keyword fsLinq   orderBy select where yield
+    syn keyword fsLinq   orderBy select seq where yield
 endif
 
 " open
 syn keyword fsOpen       open
 
 " exceptions
-syn keyword fsException  try failwith failwithf finally
+syn keyword fsException  try failwith failwithf finally invalid_arg raise
+syn keyword fsException  rethrow
 
 " modifiers
 syn keyword fsModifier   abstract const extern internal override private
@@ -98,9 +107,10 @@ syn keyword fsConstant   null
 syn keyword fsBoolean    false true
 
 " types
-syn keyword  fsType      array bool char exn float format format4
-syn keyword  fsType      int int32 int64 lazy_t list nativeint option
-syn keyword  fsType      seq string unit
+syn keyword  fsType      array bool byte char decimal double enum exn float
+syn keyword  fsType      float32 int int16 int32 int64 lazy_t list nativeint
+syn keyword  fsType      obj option sbyte single string uint uint32 uint64
+syn keyword  fsType      unativeint unit
 
 " core classes
 syn match    fsCore      "\u\a*\." transparent contains=fsCoreClass
