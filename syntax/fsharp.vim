@@ -1,6 +1,6 @@
 " Vim syntax file
 " Language:     F#
-" Last Change:  Tue 12 Jul 2011 11:48:00 PM CEST
+" Last Change:  Wed 13 Jul 2011 11:11:33 PM CEST
 " Maintainer:   Gregor Uhlenheuer <kongo2002@googlemail.com>
 "
 " Note:         This syntax file is a complete rewrite of the original version
@@ -156,6 +156,8 @@ syn match    fsFloat         "\<-\=\d\(_\|\d\)*\.\(_\|\d\)*\([eE][-+]\=\d\(_\|\d
 syn match    fsFloat         "\<-\=\d\(_\|\d\)*\.\(_\|\d\)*\([eE][-+]\=\d\(_\|\d\)*\)\=\>"
 syn match    fsFloat         "\<\d\+\.\d*"
 
+" attributes
+syn region   fsAttrib matchgroup=fsAttribute start="\[<" end=">]"
 
 " preprocessor directives
 syn region   fsPreCondit
@@ -216,10 +218,12 @@ if version >= 508 || !exists("did_fs_syntax_inits")
     HiLink fsType          Type
 
     HiLink fsCoreClass     Typedef
+    HiLink fsAttrib        Typedef
 
     HiLink fsTodo          Todo
 
     HiLink fsEncl          Delimiter
+    HiLink fsAttribute     Delimiter
 
     delcommand HiLink
 endif
