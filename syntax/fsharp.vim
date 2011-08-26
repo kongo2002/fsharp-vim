@@ -1,6 +1,6 @@
 " Vim syntax file
 " Language:     F#
-" Last Change:  Wed 13 Jul 2011 11:23:10 PM CEST
+" Last Change:  Thu 14 Jul 2011 12:41:53 AM CEST
 " Maintainer:   Gregor Uhlenheuer <kongo2002@googlemail.com>
 "
 " Note:         This syntax file is a complete rewrite of the original version
@@ -29,7 +29,8 @@ syn keyword  fsScript contained trace untrace untrace_all print_depth
 syn keyword  fsScript contained print_length
 
 " comments
-syn match    fsComment "//.*$" contains=fsTodo,@Spell
+syn match    fsComment "//.*$" contains=fsTodo,fsXmlDoc,@Spell
+syn region   fsXml matchgroup=fsXmlDoc start="<[^>]\+>" end="</[^>]\+>" contained
 
 
 " symbol names
@@ -234,6 +235,9 @@ if version >= 508 || !exists("did_fs_syntax_inits")
 
     HiLink fsEncl          Delimiter
     HiLink fsAttribute     Delimiter
+
+    HiLink fsXmlDoc        Delimiter
+    HiLink fsXml           Delimiter
 
     delcommand HiLink
 endif
