@@ -1,6 +1,6 @@
 " Vim filetype plugin
 " Language:     F#
-" Last Change:  Thu 03 Nov 2011 11:52:11 PM CET
+" Last Change:  Fri 04 Nov 2011 12:16:49 AM CET
 " Maintainer:   Gregor Uhlenheuer <kongo2002@googlemail.com>
 
 if exists('b:did_ftplugin')
@@ -15,7 +15,9 @@ set cpo&vim
 setl fdm=syntax
 
 " comment settings
+setl formatoptions=croql
 setl commentstring=(*%s*)
+setl comments=s0:*\ -,m0:*\ \ ,ex0:*),s1:(*,mb:*,ex:*),:\/\/\/,:\/\/
 
 let s:candidates = [ 'fsi',
             \ 'fsi.exe',
