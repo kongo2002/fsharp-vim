@@ -1,6 +1,6 @@
 " Vim filetype plugin
 " Language:     F#
-" Last Change:  Thu 03 Nov 2011 09:12:21 PM CET
+" Last Change:  Thu 03 Nov 2011 11:52:11 PM CET
 " Maintainer:   Gregor Uhlenheuer <kongo2002@googlemail.com>
 
 if exists('b:did_ftplugin')
@@ -13,6 +13,9 @@ set cpo&vim
 
 " enable syntax based folding
 setl fdm=syntax
+
+" comment settings
+setl commentstring=(*%s*)
 
 let s:candidates = [ 'fsi',
             \ 'fsi.exe',
