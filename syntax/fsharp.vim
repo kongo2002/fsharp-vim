@@ -1,6 +1,6 @@
 " Vim syntax file
 " Language:     F#
-" Last Change:  Fri 26 Aug 2011 09:33:47 PM CEST
+" Last Change:  Thu 03 Nov 2011 08:18:15 PM CET
 " Maintainer:   Gregor Uhlenheuer <kongo2002@googlemail.com>
 "
 " Note:         This syntax file is a complete rewrite of the original version
@@ -76,7 +76,7 @@ syn keyword fsKeyword    to type upcast val void when while with
 syn keyword fsKeyword    async atomic break checked component const constraint
 syn keyword fsKeyword    constructor continue decimal eager event external
 syn keyword fsKeyword    fixed functor include method mixin object process
-syn keyword fsKeyword    property pure return tailcall trait
+syn keyword fsKeyword    property pure return seq tailcall trait
 
 " additional operator keywords (Microsoft.FSharp.Core.Operators)
 syn keyword fsKeyword    box hash sizeof typeof typedefof unbox ref fst snd
@@ -89,7 +89,7 @@ syn keyword fsKeyword    log10 pown round sign sin sinh sqrt tan tanh
 syn keyword fsOCaml      asr land lor lsl lsr lxor mod sig
 
 if !exists('g:fsharp_no_linq') || g:fsharp_no_linq == 0
-    syn keyword fsLinq   orderBy select seq where yield
+    syn keyword fsLinq   orderBy select where yield
 endif
 
 " open
@@ -117,7 +117,8 @@ syn keyword  fsType      unativeint unit
 " core classes
 syn match    fsCore      "\u\a*\." transparent contains=fsCoreClass
 
-syn keyword  fsCoreClass Array Directory File List Path Seq Tuple contained
+syn keyword  fsCoreClass Array Async Directory File List Option Path contained
+syn keyword  fsCoreClass Seq Tuple contained
 
 " options
 syn keyword  fsOption    Some None
