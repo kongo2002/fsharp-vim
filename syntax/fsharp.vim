@@ -1,6 +1,6 @@
 " Vim syntax file
 " Language:     F#
-" Last Change:  Thu 03 Nov 2011 08:45:43 PM CET
+" Last Change:  Thu 03 Nov 2011 08:51:41 PM CET
 " Maintainer:   Gregor Uhlenheuer <kongo2002@googlemail.com>
 "
 " Note:         This syntax file is a complete rewrite of the original version
@@ -19,14 +19,15 @@ syn case match
 " reset 'iskeyword' setting
 setl isk&vim
 
-" Scripting directives
+" Scripting/preprocessor directives
 syn match    fsSScript "^#\S\+" transparent contains=fsScript
 
 syn match    fsScript contained "#"
 syn keyword  fsScript contained quitlabels warnings directory cd load use
 syn keyword  fsScript contained install_printer remove_printer requirethread
 syn keyword  fsScript contained trace untrace untrace_all print_depth
-syn keyword  fsScript contained print_length
+syn keyword  fsScript contained print_length define undef if elif else endif
+syn keyword  fsScript contained line error warning light
 
 
 " comments
@@ -175,10 +176,7 @@ syn match    fsFloat         "\<\d\+\.\d*"
 " attributes
 syn region   fsAttrib matchgroup=fsAttribute start="\[<" end=">]"
 
-" preprocessor directives
-syn region   fsPreCondit
-            \ start="^\s*#\s*\(define\|undef\|if\|elif\|else\|endif\|line\|error\|warning\|light\)"
-                \ skip="\\$" end="$" contains=fsComment keepend
+" regions
 syn region   fsRegion matchgroup=fsPreCondit start="^\s*#\s*region.*$"
             \ end="^\s*#\s*endregion" transparent fold contains=TOP
 
