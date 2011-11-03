@@ -1,6 +1,6 @@
 " Vim syntax file
 " Language:     F#
-" Last Change:  Thu 03 Nov 2011 08:36:17 PM CET
+" Last Change:  Thu 03 Nov 2011 08:45:43 PM CET
 " Maintainer:   Gregor Uhlenheuer <kongo2002@googlemail.com>
 "
 " Note:         This syntax file is a complete rewrite of the original version
@@ -39,11 +39,11 @@ syn match    fsSymbol     "\%(\%(\<let!\=\s\+\%(rec\s\+\)\=\)\|\%(\<use!\=\s\+\)
 
 
 " modules
-syn match    fsModule     "\%(\<open\s\+\)\@<=\S\+"
+syn match    fsModule     "\%(\<open\s\+\)\@<=[a-zA-Z.]\+"
 
 
 " types
-syn match    fsTypeName   "\%(\<type\s\+\)\@<=\S\+"
+syn match    fsTypeName   "\%(\<type\s\+\)\@<=\w\+"
 
 
 " errors
