@@ -1,6 +1,6 @@
 " Vim syntax file
 " Language:     F#
-" Last Change:  Thu 03 Nov 2011 08:51:41 PM CET
+" Last Change:  Thu 03 Nov 2011 09:09:59 PM CET
 " Maintainer:   Gregor Uhlenheuer <kongo2002@googlemail.com>
 "
 " Note:         This syntax file is a complete rewrite of the original version
@@ -20,7 +20,7 @@ syn case match
 setl isk&vim
 
 " Scripting/preprocessor directives
-syn match    fsSScript "^#\S\+" transparent contains=fsScript
+syn match    fsSScript "^#\S\+" transparent contains=fsScript,fsRegion,fsPreCondit
 
 syn match    fsScript contained "#"
 syn keyword  fsScript contained quitlabels warnings directory cd load use
@@ -177,8 +177,8 @@ syn match    fsFloat         "\<\d\+\.\d*"
 syn region   fsAttrib matchgroup=fsAttribute start="\[<" end=">]"
 
 " regions
-syn region   fsRegion matchgroup=fsPreCondit start="^\s*#\s*region.*$"
-            \ end="^\s*#\s*endregion" transparent fold contains=TOP
+syn region   fsRegion matchgroup=fsPreCondit start="\%(end\)\@<!region.*$"
+            \ end="endregion" fold contains=ALL contained
 
 
 if version >= 508 || !exists("did_fs_syntax_inits")
@@ -201,6 +201,7 @@ if version >= 508 || !exists("did_fs_syntax_inits")
     HiLink fsOpen          Include
     HiLink fsModPath       Include
     HiLink fsScript        Include
+    HiLink fsPreCondit     Include
 
     HiLink fsKeyword       Keyword
     HiLink fsCoreMethod    Keyword
