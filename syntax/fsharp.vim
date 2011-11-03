@@ -1,6 +1,6 @@
 " Vim syntax file
 " Language:     F#
-" Last Change:  Thu 03 Nov 2011 08:22:23 PM CET
+" Last Change:  Thu 03 Nov 2011 08:36:17 PM CET
 " Maintainer:   Gregor Uhlenheuer <kongo2002@googlemail.com>
 "
 " Note:         This syntax file is a complete rewrite of the original version
@@ -118,7 +118,10 @@ syn keyword  fsType      unativeint unit
 syn match    fsCore      "\u\a*\." transparent contains=fsCoreClass
 
 syn keyword  fsCoreClass Array Async Directory File List Option Path contained
-syn keyword  fsCoreClass Seq Tuple contained
+syn keyword  fsCoreClass String Seq Tuple contained
+
+syn keyword fsCoreMethod printf printfn sprintf eprintf eprintfn fprintf
+syn keyword fsCoreMethod fprintfn
 
 " options
 syn keyword  fsOption    Some None
@@ -201,7 +204,9 @@ if version >= 508 || !exists("did_fs_syntax_inits")
     HiLink fsModPath       Include
     HiLink fsScript        Include
 
-    HiLink fsKeyword       Statement
+    HiLink fsKeyword       Keyword
+    HiLink fsCoreMethod    Keyword
+
     HiLink fsOCaml         Statement
     HiLink fsLinq          Statement
 
