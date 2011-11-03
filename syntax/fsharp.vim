@@ -1,6 +1,6 @@
 " Vim syntax file
 " Language:     F#
-" Last Change:  Thu 03 Nov 2011 08:18:15 PM CET
+" Last Change:  Thu 03 Nov 2011 08:22:23 PM CET
 " Maintainer:   Gregor Uhlenheuer <kongo2002@googlemail.com>
 "
 " Note:         This syntax file is a complete rewrite of the original version
@@ -35,7 +35,7 @@ syn region   fsXml matchgroup=fsXmlDoc start="<[^>]\+>" end="</[^>]\+>" containe
 
 
 " symbol names
-syn match    fsSymbol     "\%(\<let\s\+\%(rec\s\+\)\=\)\@<=\S\+"
+syn match    fsSymbol     "\%(\%(\<let!\=\s\+\%(rec\s\+\)\=\)\|\%(\<use!\=\s\+\)\)\@<=\w\+"
 
 
 " modules
