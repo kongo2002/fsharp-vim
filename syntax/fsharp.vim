@@ -1,6 +1,6 @@
 " Vim syntax file
 " Language:     F#
-" Last Change:  Thu 03 Nov 2011 09:36:00 PM CET
+" Last Change:  Fri 04 Nov 2011 12:39:45 AM CET
 " Maintainer:   Gregor Uhlenheuer <kongo2002@googlemail.com>
 "
 " Note:         This syntax file is a complete rewrite of the original version
@@ -20,7 +20,7 @@ syn case match
 setl isk&vim
 
 " Scripting/preprocessor directives
-syn match    fsSScript "^#\S\+" transparent contains=fsScript,fsRegion,fsPreCondit
+syn match    fsSScript "^\s*#\S\+" transparent contains=fsScript,fsRegion,fsPreCondit
 
 syn match    fsScript contained "#"
 syn keyword  fsScript contained quitlabels warnings directory cd load use
@@ -40,10 +40,6 @@ syn match fsSymbol "\%(let\|use\|mutable\|rec\)\@<=!\=\s*\zs\w\+\ze\s\+[^=:]*[=:
 syn match fsSymbol "\%(member\)\@<=\s\+\w\+\.\zs\w\+"
 
 
-" modules
-syn match    fsModule     "\%(\<open\s\+\)\@<=[a-zA-Z.]\+"
-
-
 " types
 syn match    fsTypeName   "\%(\<type\s\+\)\@<=\w\+"
 
@@ -57,10 +53,10 @@ syn match    fsCommentErr "\*)"
 
 
 " enclosing delimiters
-syn region   fsEncl transparent matchgroup=fsKeyword start="(" matchgroup=fsKeyword end=")" contains=ALLBUT,fsParenErr
-syn region   fsEncl transparent matchgroup=fsKeyword start="{" matchgroup=fsKeyword end="}"  contains=ALLBUT,fsBraceErr
-syn region   fsEncl transparent matchgroup=fsKeyword start="\[" matchgroup=fsKeyword end="\]" contains=ALLBUT,fsBrackErr
-syn region   fsEncl transparent matchgroup=fsKeyword start="\[|" matchgroup=fsKeyword end="|\]" contains=ALLBUT,fsArrErr
+syn region   fsEncl transparent matchgroup=fsKeyword start="(" matchgroup=fsKeyword end=")" contains=ALLBUT,fsParenErr,fsScript
+syn region   fsEncl transparent matchgroup=fsKeyword start="{" matchgroup=fsKeyword end="}"  contains=ALLBUT,fsBraceErr,fsScript
+syn region   fsEncl transparent matchgroup=fsKeyword start="\[" matchgroup=fsKeyword end="\]" contains=ALLBUT,fsBrackErr,fsScript
+syn region   fsEncl transparent matchgroup=fsKeyword start="\[|" matchgroup=fsKeyword end="|\]" contains=ALLBUT,fsArrErr,fsScript
 
 
 " comments
@@ -173,6 +169,9 @@ syn match    fsNumber        "\<-\=0[b|B]\([01]\|_\)\+[l|L|n]\?\>"
 syn match    fsFloat         "\<-\=\d\(_\|\d\)*\.\(_\|\d\)*\([eE][-+]\=\d\(_\|\d\)*\)\=\>"
 syn match    fsFloat         "\<-\=\d\(_\|\d\)*\.\(_\|\d\)*\([eE][-+]\=\d\(_\|\d\)*\)\=\>"
 syn match    fsFloat         "\<\d\+\.\d*"
+
+" modules
+syn match    fsModule     "\%(\<open\s\+\)\@<=[a-zA-Z.]\+"
 
 " attributes
 syn region   fsAttrib matchgroup=fsAttribute start="\[<" end=">]"
