@@ -1,6 +1,6 @@
 " Vim syntax file
 " Language:     F#
-" Last Change:  Fri 18 May 2012 01:14:03 AM CEST
+" Last Change:  Fri 18 May 2012 01:25:16 AM CEST
 " Maintainer:   Gregor Uhlenheuer <kongo2002@googlemail.com>
 "
 " Note:         This syntax file is a complete rewrite of the original version
@@ -27,7 +27,7 @@ syn keyword  fsScript contained quitlabels warnings directory cd load use
 syn keyword  fsScript contained install_printer remove_printer requirethread
 syn keyword  fsScript contained trace untrace untrace_all print_depth
 syn keyword  fsScript contained print_length define undef if elif else endif
-syn keyword  fsScript contained line error warning light
+syn keyword  fsScript contained line error warning light nowarn
 
 
 " comments
