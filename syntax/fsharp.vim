@@ -1,6 +1,6 @@
 " Vim syntax file
 " Language:     F#
-" Last Change:  Fri 18 May 2012 01:00:13 AM CEST
+" Last Change:  Fri 18 May 2012 01:14:03 AM CEST
 " Maintainer:   Gregor Uhlenheuer <kongo2002@googlemail.com>
 "
 " Note:         This syntax file is a complete rewrite of the original version
@@ -32,7 +32,7 @@ syn keyword  fsScript contained line error warning light
 
 " comments
 syn match    fsComment "//.*$" contains=fsTodo,@Spell
-syn match    fsDocComment "///.*$" contains=fsTodo,fsXml,@Spell
+syn region   fsDocComment start="///" end="$" contains=fsTodo,fsXml,@Spell keepend oneline
 syn region   fsXml matchgroup=fsXmlDoc start="<[^>]\+>" end="</[^>]\+>" contained
 
 
