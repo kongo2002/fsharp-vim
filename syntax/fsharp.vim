@@ -1,6 +1,6 @@
 " Vim syntax file
 " Language:     F#
-" Last Change:  Tue 05 Jun 2012 01:28:41 AM CEST
+" Last Change:  Tue 05 Jun 2012 01:35:25 AM CEST
 " Maintainer:   Gregor Uhlenheuer <kongo2002@googlemail.com>
 "
 " Note:         This syntax file is a complete rewrite of the original version
@@ -74,8 +74,8 @@ syn keyword fsKeyword    to type upcast val void when while with
 
 syn keyword fsKeyword    async atomic break checked component const constraint
 syn keyword fsKeyword    constructor continue decimal eager event external
-syn keyword fsKeyword    fixed functor include method mixin object process
-syn keyword fsKeyword    property pure return seq tailcall trait
+syn keyword fsKeyword    fixed functor include method mixin object parallel
+syn keyword fsKeyword    process pure return seq tailcall trait
 
 " additional operator keywords (Microsoft.FSharp.Core.Operators)
 syn keyword fsKeyword    box hash sizeof typeof typedefof unbox ref fst snd
