@@ -37,7 +37,7 @@ syn region   fsharpXml matchgroup=fsharpXmlDoc start="<[^>]\+>" end="</[^>]\+>" 
 
 
 " symbol names
-syn match fsharpSymbol "\%(let\|use\|mutable\|rec\|and\)\@<=!\=\s*\zs\w\+\ze\s*[^=:]*[=:]"
+syn match fsharpSymbol "\%(let\|use\|mutable\|rec\|and\)\@<=!\=\s\+\zs\w\+\ze\s*[^=:]*[=:]"
 syn match fsharpSymbol "\%(member\)\@<=\s\+\w\+\.\zs\w\+"
 
 
