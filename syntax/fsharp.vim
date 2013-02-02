@@ -116,7 +116,7 @@ syn keyword  fsharpType      unativeint unit
 " core classes
 syn match    fsharpCore      "\u\a*\." transparent contains=fsharpCoreClass
 
-syn keyword  fsharpCoreClass Array Async Directory File List Option Path contained
+syn keyword  fsharpCoreClass Array Async Directory File List Option Path Map Set contained
 syn keyword  fsharpCoreClass String Seq Tuple contained
 
 syn keyword fsharpCoreMethod printf printfn sprintf eprintf eprintfn fprintf
