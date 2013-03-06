@@ -70,7 +70,7 @@ syn keyword fsharpKeyword    do done downcast downto elif else end exception
 syn keyword fsharpKeyword    extern for fun function global if in inherit inline
 syn keyword fsharpKeyword    interface lazy let match member module mutable
 syn keyword fsharpKeyword    namespace new of override rec static struct then
-syn keyword fsharpKeyword    to type upcast val void when while with
+syn keyword fsharpKeyword    to type upcast use val void when while with
 
 syn keyword fsharpKeyword    async atomic break checked component const constraint
 syn keyword fsharpKeyword    constructor continue decimal eager event external
