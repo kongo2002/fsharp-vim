@@ -1,6 +1,6 @@
 " Vim syntax file
 " Language:     F#
-" Last Change:  Thu 26 Jul 2012 11:32:59 PM CEST
+" Last Change:  Thu 07 Mar 2013 10:44:27 PM CET
 " Maintainer:   Gregor Uhlenheuer <kongo2002@googlemail.com>
 "
 " Note:         This syntax file is a complete rewrite of the original version
@@ -226,7 +226,9 @@ if version >= 508 || !exists("did_fs_syntax_inits")
     HiLink fsharpCharacter     Character
     HiLink fsharpNumber        Number
     HiLink fsharpFloat         Float
+
     HiLink fsharpString        String
+    HiLink fsharpFormat        Special
 
     HiLink fsharpModifier      StorageClass
 
