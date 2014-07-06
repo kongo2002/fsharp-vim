@@ -11,6 +11,26 @@ let b:did_ftplugin = 1
 let s:cpo_save = &cpo
 set cpo&vim
 
+" Jump to bindings in the first column, taken from python.
+nnoremap <silent> <buffer> ]] :call <SID>Fsharp_jump('/^\(let\\|type\\|do\\|module\)')<cr>
+nnoremap <silent> <buffer> [[ :call <SID>Fsharp_jump('?^\(let\\|type\\|do\\|module\)')<cr>
+nnoremap <silent> <buffer> ]m :call <SID>Fsharp_jump('/^\s*\(let\\|type\\|do\\|module\)')<cr>
+nnoremap <silent> <buffer> [m :call <SID>Fsharp_jump('?^\s*\(let\\|type\\|do\\|module\)')<cr>
+
+if exists('*<SID>Fsharp_jump') | finish | endif
+
+fun! <SID>Fsharp_jump(motion) range
+    let cnt = v:count1
+    let save = @/    " save last search pattern
+    mark '
+    while cnt > 0
+	silent! exe a:motion
+	let cnt = cnt - 1
+    endwhile
+    call histdel('/', -1)
+    let @/ = save    " restore last search pattern
+endfun
+
 " enable syntax based folding
 setl fdm=syntax
 
