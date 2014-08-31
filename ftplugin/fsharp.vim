@@ -1,6 +1,6 @@
 " Vim filetype plugin
 " Language:     F#
-" Last Change:  Fri 18 May 2012 01:59:07 AM CEST
+" Last Change:  Sun 31 Aug 2014 06:55:32 PM CEST
 " Maintainer:   Gregor Uhlenheuer <kongo2002@googlemail.com>
 
 if exists('b:did_ftplugin')
@@ -39,8 +39,13 @@ setl formatoptions=croql
 setl commentstring=(*%s*)
 setl comments=s0:*\ -,m0:*\ \ ,ex0:*),s1:(*,mb:*,ex:*),:\/\/\/,:\/\/
 
+" tab/indentation settings
+setl expandtab
+setl nolisp
+setl nosmartindent
+
 " make ftplugin undo-able
-let b:undo_ftplugin = 'setl fo< cms< com< fdm<'
+let b:undo_ftplugin = 'setl fo< cms< com< fdm< et< si< lisp<'
 
 let s:candidates = [ 'fsi',
             \ 'fsi.exe',
