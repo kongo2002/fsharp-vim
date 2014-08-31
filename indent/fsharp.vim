@@ -26,15 +26,6 @@ setlocal indentkeys+=0=and,0=class,0=constraint,0=done,0=else,0=end,0=exception,
 setlocal nolisp
 setlocal nosmartindent
 
-" Comment formatting
-" TODO: need support for // style comments
-if !exists("no_fsharp_comments")
-    if (has("comments"))
-        setlocal comments=sr:(*,mb:*,ex:*)
-        setlocal fo=cqort
-    endif
-endif
-
 " Only define the function once.
 if exists("*GetFsharpIndent")
     finish
