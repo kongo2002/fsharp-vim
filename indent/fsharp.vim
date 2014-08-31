@@ -243,11 +243,6 @@ function! GetFsharpIndent()
 
     endif
 
-    " Subtract a 'shiftwidth' after lines matching 'match ... with parser':
-    if lline =~ '\<match\>.*\<with\>\s*\<parser\s*$'
-        let ind = ind - &sw
-    endif
-
     return ind
 
 endfunction
