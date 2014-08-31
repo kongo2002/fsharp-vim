@@ -1,6 +1,6 @@
 " Vim filetype plugin
 " Language:     F#
-" Last Change:  Sun 31 Aug 2014 06:55:32 PM CEST
+" Last Change:  Sun 31 Aug 2014 06:58:41 PM CEST
 " Maintainer:   Gregor Uhlenheuer <kongo2002@googlemail.com>
 
 if exists('b:did_ftplugin')
@@ -21,14 +21,16 @@ if exists('*<SID>Fsharp_jump') | finish | endif
 
 fun! <SID>Fsharp_jump(motion) range
     let cnt = v:count1
-    let save = @/    " save last search pattern
+    " save last search pattern
+    let save = @/
     mark '
     while cnt > 0
-	silent! exe a:motion
-	let cnt = cnt - 1
+        silent! exe a:motion
+        let cnt = cnt - 1
     endwhile
     call histdel('/', -1)
-    let @/ = save    " restore last search pattern
+    " restore last search pattern
+    let @/ = save
 endfun
 
 " enable syntax based folding
@@ -46,37 +48,6 @@ setl nosmartindent
 
 " make ftplugin undo-able
 let b:undo_ftplugin = 'setl fo< cms< com< fdm< et< si< lisp<'
-
-let s:candidates = [ 'fsi',
-            \ 'fsi.exe',
-            \ 'fsharpi',
-            \ 'fsharpi.exe' ]
-
-if !exists('g:fsharp_interactive_bin')
-    let g:fsharp_interactive_bin = ''
-    for c in s:candidates
-        if executable(c)
-            let g:fsharp_interactive_bin = c
-        endif
-    endfor
-endif
-
-function! s:launchInteractive(from, to)
-    if !executable(g:fsharp_interactive_bin)
-        echohl WarningMsg
-        echom 'fsharp.vim: no fsharp interactive binary found'
-        echom 'fsharp.vim: set g:fsharp_interactive_bin appropriately'
-        echohl None
-        return
-    endif
-
-    let tmpfile = tempname()
-    echo tmpfile
-    exec a:from . ',' . a:to . 'w! ' . tmpfile
-    exec '!' . g:fsharp_interactive_bin '--gui- --nologo --use:"'.tmpfile.'"'
-endfunction
-
-com! -buffer -range=% Interactive call s:launchInteractive(<line1>, <line2>)
 
 let &cpo = s:cpo_save
 
