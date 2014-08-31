@@ -1,6 +1,6 @@
 " Vim syntax file
 " Language:     F#
-" Last Change:  Thu 07 Mar 2013 10:44:27 PM CET
+" Last Change:  Sun 31 Aug 2014 07:24:03 PM CEST
 " Maintainer:   Gregor Uhlenheuer <kongo2002@googlemail.com>
 "
 " Note:         This syntax file is a complete rewrite of the original version
@@ -134,6 +134,7 @@ syn match    fsharpCharacter    "'\\\d\d\d'\|'\\[\'ntbr]'\|'.'"
 syn match    fsharpCharErr      "'\\\d\d'\|'\\\d'"
 syn match    fsharpCharErr      "'\\[^\'ntbr]'"
 syn region   fsharpString       start=+"+ skip=+\\\\\|\\"+ end=+"+ contains=fsharpFormat
+syn region   fsharpRawString    start=+"""+ end=+"""+ contains=fsharpFormat
 
 syn match    fsharpFunDef       "->"
 syn match    fsharpRefAssign    ":="
@@ -228,6 +229,8 @@ if version >= 508 || !exists("did_fs_syntax_inits")
     HiLink fsharpFloat         Float
 
     HiLink fsharpString        String
+    HiLink fsharpRawString     String
+
     HiLink fsharpFormat        Special
 
     HiLink fsharpModifier      StorageClass
