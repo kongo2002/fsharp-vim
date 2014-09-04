@@ -1,6 +1,6 @@
 " Vim syntax file
 " Language:     F#
-" Last Change:  Sun 31 Aug 2014 08:48:32 PM CEST
+" Last Change:  Thu 04 Sep 2014 08:35:49 PM CEST
 " Maintainer:   Gregor Uhlenheuer <kongo2002@googlemail.com>
 "
 " Note:         This syntax file is a complete rewrite of the original version
@@ -61,7 +61,7 @@ syn region   fsharpEncl transparent matchgroup=fsharpKeyword start="\[|" matchgr
 
 
 " comments
-syn region   fsharpComment start="(\*\ze[^)]" end="\*)" contains=fsharpComment,fsharpTodo
+syn region   fsharpComment start="(\*\ze\([^)]\|\n\)" end="\*)" contains=fsharpComment,fsharpTodo
 syn keyword  fsharpTodo contained TODO FIXME XXX NOTE
 
 " keywords
