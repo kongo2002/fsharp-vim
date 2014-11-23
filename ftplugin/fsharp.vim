@@ -41,6 +41,30 @@ setl formatoptions=croql
 setl commentstring=(*%s*)
 setl comments=s0:*\ -,m0:*\ \ ,ex0:*),s1:(*,mb:*,ex:*),:\/\/\/,:\/\/
 
+" switching between interfaces (.fsi) and implementations (.fs). taken from omlet.
+if !exists("g:did_fsharp_switch")
+  let g:did_fsharp_switch = 1
+  map <LocalLeader>s :call FSharp_switch(0)<CR>
+  map <LocalLeader>S :call FSharp_switch(1)<CR>
+  fun FSharp_switch(newwin)
+    if (match(bufname(""), "\\.fsi$") >= 0)
+      let fname = substitute(bufname(""), "\\.fsi$", ".fs", "")
+      if (a:newwin == 1)
+        exec "new " . fname
+      else
+        exec "arge " . fname
+      endif
+    elseif (match(bufname(""), "\\.fs$") >= 0)
+      let fname = bufname("") . "i"
+      if (a:newwin == 1)
+        exec "new " . fname
+      else
+        exec "arge " . fname
+      endif
+    endif
+  endfun
+endif
+
 " tab/indentation settings
 setl expandtab
 setl nolisp
